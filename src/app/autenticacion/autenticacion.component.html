@@ -1,0 +1,32 @@
+<form [formGroup] = "formaIniciar">
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo electrónico</label>
+      <input type="email" class="form-control" 
+        id="correo" aria-describedby="emailHelp" formControlName="correo">
+        @if (getCorreo.invalid && (getCorreo.dirty || getCorreo.touched)) {
+            @if (getCorreo.errors?.['required']) {
+                <div class="text-danger">Correo requerido</div>
+            }
+            @if (getCorreo.errors?.['email']) {
+                <div class="text-danger">Correo debe tener un formato válido</div>
+            }
+        }
+    </div>
+    <div class="mb-3">
+      <label for="contrasena" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" 
+        id="contrasena" formControlName="contrasena">
+        @if (getContrasena.invalid && (getContrasena.dirty || getContrasena.touched)) {
+            @if (getContrasena.errors?.['required']) {
+                <div class="text-danger">Contraseña requerida</div>
+            }
+        }
+    </div>
+    @if (leyendaError){
+        <div class="text-danger">{{leyendaError}}</div>
+    }
+    <button type="submit" class="btn btn-primary" (click)="btnIniciar()">Login</button>
+  </form>
+  @if (cargando) {
+    <img src = "assets/svg-spinners.svg" width="50" height="50" alt="Cargando..."/>
+  }
